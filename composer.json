@@ -1,0 +1,22 @@
+{
+  "name": "susoft/license-guard",
+  "description": "License guard middleware for Laravel apps – calls remote license server and blocks invalid installs.",
+  "type": "library",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "Susoft\\LicenseGuard\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Susoft\\LicenseGuard\\LicenseGuardServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "illuminate/support": "^10.0|^11.0|^12.0"
+  }
+}
