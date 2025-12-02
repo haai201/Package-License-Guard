@@ -31,26 +31,29 @@ class Obfuscator
 
     public static function licenseEndpoint(): string
     {
-        // TODO: đổi yourdomain.com thành domain license server thật của bạn
         $parts = [
-            'aHR0cHM6Ly8=',                   
-            'bGljZW5zZS4=',                   
-            'eW91cmRkb21haW4uY29t',           
-            'L2FwaS9saWNlbnNlL2NoZWNr'        
+            'aHR0cHM6Ly8=',
+            'bGljZW5zZS4=',
+            'dnRjbmV0dmlldC5jb20=',
+            'L2FwaS9saWNlbnNlL3ZlcmlmeQ=='
         ];
 
-        $b64 = implode('', $parts);
+        $url = '';
 
-        return base64_decode($b64);
+        foreach ($parts as $p) {
+            $url .= base64_decode($p);
+        }
+
+        return $url;
     }
+
 
     public static function sharedSecret(): string
     {
-        // TODO: đồng bộ với LICENSE_SECRET trên server, sau đó mã hoá lại các chunk này
         $chunks = [
-            'c2VjcmV0',     
-            'X2tleV8=',     
-            'NDU2YWFi'      
+            'OFlrMlVoM0RuMkZq',
+            'czgyaHNLOTEyaEgx=',
+            'OXNoQTkySHM='
         ];
 
         $s = '';
@@ -60,4 +63,5 @@ class Obfuscator
 
         return strrev($s);
     }
+
 }
