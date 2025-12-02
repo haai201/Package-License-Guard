@@ -5,6 +5,7 @@ namespace Susoft\LicenseGuard;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
 use Susoft\LicenseGuard\Http\Middleware\LicenseGuardMiddleware;
+use Susoft\LicenseGuard\Console\InstallCommand;
 
 class LicenseGuardServiceProvider extends ServiceProvider
 {
@@ -24,13 +25,17 @@ class LicenseGuardServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'license_guard');
 
+        // Đăng ký command khi chạy CLI
         if ($this->app->runningInConsole()) {
+            $this->commands([
+                InstallCommand::class,
+            ]);
+
             return;
         }
 
         /** @var Kernel $kernel */
         $kernel = $this->app->make(Kernel::class);
-
         $kernel->pushMiddleware(LicenseGuardMiddleware::class);
     }
 }
